@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="dashboard">
+  <h1>Form Submission Dashboard</h1>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Form ID</th>
+        <th>Submitted By</th>
+        <th>Submission Date</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for form in forms %}
+      <tr>
+        <td>{{ form.id }}</td>
+        <td>{{ form.submitted_by }}</td>
+        <td>{{ form.submission_date }}</td>
+        <td>
+          {% if form.status == 'pending' %}
+            <span style="color: orange;">Pending</span>
+          {% elif form.status == 'approved' %}
+            <span style="color: green;">Approved</span>
+          {% elif form.status == 'declined' %}
+            <span style="color: red;">Declined</span>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
