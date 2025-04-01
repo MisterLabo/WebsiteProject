@@ -94,7 +94,7 @@
                             </div>
                           </div>
                         <div class="form-group">
-                          <label for="proposedTitle">Proposed Title</label>
+                          <label for="proposedTitle">Proposed Title: </label>
                           <input
                             type="title"
                             class="form-control"
@@ -103,7 +103,7 @@
                           />
                         </div>
                         <div class="form-group">
-                          <label for="date">Date</label>
+                          <label for="date">Date: </label>
                           <input
                             type="date"
                             class="form-control"
@@ -115,7 +115,7 @@
                         
                         <div class="form-group">
                           <label for="exampleFormControlFile1"
-                            >Example file input</label
+                            >Insert File</label
                           >
                           <input
                             type="file"
@@ -129,6 +129,24 @@
                           </textarea>
                         </div>
                         <div class="form-group">
+                          <label for="proposedTitle">Purpose: </label>
+                          <input
+                            type="title"
+                            class="form-control"
+                            id="purposeOfRequest"
+                            placeholder="Input here"
+                          />
+                        </div>
+                        <div class="form-group">
+                          <label for="proposedTitle">Scope: </label>
+                          <input
+                            type="title"
+                            class="form-control"
+                            id="scopeOfRequest"
+                            placeholder="Input here"
+                          />
+                        </div>
+                        <div class="form-group">
                             <label for="disableinput">Disable Input</label>
                             <input
                               type="text"
@@ -138,23 +156,24 @@
                               disabled
                             />
                           </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlSelect1"
-                              >Example select</label
+                          <div class="form-group">
+                            <label for="divisionSection"
+                              >Division/Section: </label
                             >
                             <select
                               class="form-select"
-                              id="exampleFormControlSelect1"
+                              id="divisionSection"
                             >
-                              <option>1</option>
-                              <option>2</option>
-                              <option>3</option>
-                              <option>4</option>
-                              <option>5</option>
+                              <option>--Select Division/Section--</option>
+                              <option>Nylon Coating</option>
+                              <option>Wire Stranding</option>
+                              <option>Wire Drawing</option>
+                              <option>Medical Production</option>
+                              <option>Medical Components</option>
                             </select>
-                          </div>
+                          </div>    
                         <div class="form-group">
-                            <label for="date">Date</label>
+                            <label for="date">Required Date: </label>
                             <input
                               type="date"
                               class="form-control"
@@ -173,9 +192,18 @@
                             class="form-check-label"
                             for="flexCheckDefault"
                           >
-                            Agree with terms and conditions
+                            All inputs are true
                           </label>
                         </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="proposedTitle">Approved By: </label>
+                        <input
+                          type="title"
+                          class="form-control"
+                          id="approve"
+                          placeholder="Name here"
+                        />
                       </div>
                       <div class="col-md-6 col-lg-4">
                         <div class="form-group">
@@ -713,15 +741,7 @@
                         <label class="mt-3 mb-3"
                           ><b>Form Floating Label</b></label
                         >
-                        <div class="form-floating form-floating-custom mb-3">
-                          <input
-                            type="email"
-                            class="form-control"
-                            id="floatingInput"
-                            placeholder="name@example.com"
-                          />
-                          <label for="floatingInput">Email address</label>
-                        </div>
+                        
                         <div class="form-floating form-floating-custom mb-3">
                           <select
                             class="form-select"
@@ -1040,39 +1060,6 @@
       </div>
       <!-- End Custom template -->
     </div>
-    <!--   Core JS Files   -->
-    <script src="../assets/js/core/jquery-3.7.1.min.js"></script>
-    <script src="../assets/js/core/popper.min.js"></script>
-    <script src="../assets/js/core/bootstrap.min.js"></script>
-
-    <!-- jQuery Scrollbar -->
-    <script src="../assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
-
-    <!-- Chart JS -->
-    <script src="../assets/js/plugin/chart.js/chart.min.js"></script>
-
-    <!-- jQuery Sparkline -->
-    <script src="../assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js"></script>
-
-    <!-- Chart Circle -->
-    <script src="../assets/js/plugin/chart-circle/circles.min.js"></script>
-
-    <!-- Datatables -->
-    <script src="../assets/js/plugin/datatables/datatables.min.js"></script>
-
-    <!-- Bootstrap Notify -->
-    <script src="../assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
-
-    <!-- jQuery Vector Maps -->
-    <script src="../assets/js/plugin/jsvectormap/jsvectormap.min.js"></script>
-    <script src="../assets/js/plugin/jsvectormap/world.js"></script>
-
-    <!-- Google Maps Plugin -->
-    <script src="../assets/js/plugin/gmaps/gmaps.js"></script>
-
-    <!-- Sweet Alert -->
-    <script src="../assets/js/plugin/sweetalert/sweetalert.min.js"></script>
-    
   </body>
 </html>
 
