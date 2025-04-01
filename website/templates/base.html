@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Website{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+</head>
+<body>
+
+    <!-- 🔽 Navigation Bar (Shared Across All Pages) -->
+    <nav>
+        <ul>
+            <li><a href="{% url 'home:index' %}">Home</a></li>
+            <li><a href="{% url 'forms:request' %}">Forms</a></li>
+            <li><a href="#">About</a></li>
+        </ul>
+    </nav>
+
+    <!-- 🔽 Sliding Images or Hero Section -->
+    <div id="slider">
+        <!--<img src="{% static 'img/slide1.jpg' %}" alt="Slide 1">
+        <img src="{% static 'img/slide2.jpg' %}" alt="Slide 2">-->
+    </div>
+
+    <!-- 🔽 Main Content Block (Will Be Overridden by Child Templates) -->
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
