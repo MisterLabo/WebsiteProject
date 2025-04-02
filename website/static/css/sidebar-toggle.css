@@ -1,0 +1,8 @@
+/* Styles for hiding and showing the navigation bar */
+.sidebar.hidden {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+}
+.sidebar {
+    transition: transform 0.3s ease-in-out;
+}

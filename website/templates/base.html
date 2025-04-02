@@ -7,24 +7,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Toyoflex - Asahi Intecc{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animation.css' %}">
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navigation.css' %}">
+    <style>
+        /* Add styles for the floating profile link */
+        .profile-link {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: #007BFF;
+            color: rgb(0, 0, 0);
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+        .profile-link:hover {
+            background-color: #0056b3;
+        }
+        .hidden {
+            display: none; /* Ensure this is only applied when toggling */
+        }
+        .sidebar {
+            width: 100px; /* Define a fixed width for the sidebar */
+            position: fixed; /* Keep the sidebar fixed on the left */
+            height: 100%; /* Make the sidebar span the full height of the viewport */
+            overflow-y: auto; /* Add scrolling if the content overflows */
+            display: block; /* Ensure the sidebar is visible by default */
+        }
+        .content {
+            margin-left: 250px; /* Adjust this value to match the width of the sidebar */
+            padding: 20px; /* Optional: Add padding for better spacing */
+        }
+    </style>
 </head>
 <body>
-    <nav>
-        <a href="{% url 'home:index' %}">
+    <nav class="sidebar ocean-theme" aria-label="Main Navigation"> <!-- Remove 'hidden' class -->
+        <button class="nav-toggle" aria-expanded="false" aria-controls="navMenu">
+            <span class="sr-only">Toggle navigation</span>
+            &#9776;
+        </button>
+        <a href="{% url 'home:index' %}" class="nav-logo-container">
             <img src="{% static 'images/logo.jpg' %}" alt="Toyoflex Logo" class="nav-logo">
         </a>
-        <ul>
-            <li><a href="{% url 'home:index' %}">Home</a></li>
-            <li><a href="{% url 'forms:request' %}">Forms</a></li>
-            <li><a href="{% url 'dashboard:Dashboard' %}">Dashboard</a></li>
-            <li><a href="{% url 'personalProfile:Profile' %}">Profile</a></li>
-            <li><a href="{% url 'aboutUs:about_us' %}">About Us</a></li>
-            <!-- Add new links here when a new app is created -->
+        <ul id="navMenu" class="nav-menu vertical-menu" role="menu">
+            <li class="nav-item" role="menuitem"><a href="{% url 'home:index' %}" class="nav-link">Home</a></li>
+            <li class="nav-item" role="menuitem"><a href="{% url 'forms:request' %}" class="nav-link">Forms</a></li>
+            <li class="nav-item" role="menuitem"><a href="{% url 'dashboard:Dashboard' %}" class="nav-link">Dashboard</a></li>
+            <li class="nav-item" role="menuitem"><a href="{% url 'aboutUs:about_us' %}" class="nav-link">About Us</a></li>
         </ul>
     </nav>
+    <a href="{% url 'personalProfile:Profile' %}" class="profile-link">Profile</a>
     <div class="content">
         {% block content %}
         {% endblock %}
     </div>
+    <script src="{% static 'js/scripts.js' %}"></script>
+    <script>
+        // Add JavaScript for toggle functionality
+        document.querySelector('.nav-toggle').addEventListener('click', function () {
+            const sidebar = document.querySelector('.sidebar');
+            const expanded = this.getAttribute('aria-expanded') === 'true';
+            this.setAttribute('aria-expanded', !expanded);
+            sidebar.classList.toggle('hidden'); // Toggle visibility
+        });
+    </script>
 </body>
 </html>

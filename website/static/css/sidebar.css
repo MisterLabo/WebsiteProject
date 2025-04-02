@@ -1,0 +1,59 @@
+body {
+    display: flex;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0; /* Ensure the sidebar is positioned on the left */
+    width: 250px; /* Adjust width as needed */
+    height: 100%;
+    background-color: #283038; /* Example background color */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    z-index: 1000;
+    transition: transform 0.3s ease; /* Smooth toggle animation */
+}
+
+.sidebar.hidden {
+    transform: translateX(-100%); /* Hide the sidebar off-screen */
+}
+
+.sidebar .nav-logo {
+    width: 150px;
+    margin-bottom: 20px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+}
+
+.sidebar ul li {
+    width: 100%;
+}
+
+.sidebar ul li a {
+    display: block;
+    padding: 10px 20px;
+    color: rgb(70, 52, 52);
+    text-decoration: none;
+    text-align: left;
+}
+
+.sidebar ul li a:hover {
+    background-color: #575757;
+}
+
+.content {
+    margin-left: 250px;
+    padding: 20px;
+    width: calc(100% - 250px);
+}
+
+.nav-toggle {
+    display: none;
+}

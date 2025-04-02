@@ -3,7 +3,9 @@
 // Function to toggle the navigation menu on smaller screens
 function toggleNav() {
     const navMenu = document.getElementById('navMenu');
-    navMenu.classList.toggle('active');
+    if (navMenu) { // Ensure navMenu exists
+        navMenu.classList.toggle('active');
+    }
 }
 
 // Close the navigation menu when a link is clicked
@@ -12,7 +14,9 @@ function closeNavOnClick() {
     navLinks.forEach(link => {
         link.addEventListener('click', () => {
             const navMenu = document.getElementById('navMenu');
-            navMenu.classList.remove('active');
+            if (navMenu) { // Ensure navMenu exists
+                navMenu.classList.remove('active');
+            }
         });
     });
 }
@@ -24,4 +28,17 @@ document.addEventListener('DOMContentLoaded', () => {
         navToggle.addEventListener('click', toggleNav);
     }
     closeNavOnClick();
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    const navToggle = document.querySelector('.nav-toggle');
+    const sidebar = document.querySelector('.sidebar');
+
+    if (navToggle && sidebar) {
+        navToggle.addEventListener('click', function () {
+            const expanded = this.getAttribute('aria-expanded') === 'true';
+            this.setAttribute('aria-expanded', !expanded);
+            sidebar.classList.toggle('hidden');
+        });
+    }
 });
