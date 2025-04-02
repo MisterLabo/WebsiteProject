@@ -5,16 +5,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Toyoflex{% endblock %}</title>
+    <title>{% block title %}Toyoflex - Asahi Intecc{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
     <nav>
+        <a href="{% url 'home:index' %}">
+            <img src="{% static 'images/logo.jpg' %}" alt="Toyoflex Logo" class="nav-logo">
+        </a>
         <ul>
             <li><a href="{% url 'home:index' %}">Home</a></li>
             <li><a href="{% url 'forms:request' %}">Forms</a></li>
             <li><a href="{% url 'dashboard:Dashboard' %}">Dashboard</a></li>
             <li><a href="{% url 'personalProfile:Profile' %}">Profile</a></li>
+            <li><a href="{% url 'aboutUs:about_us' %}">About Us</a></li>
             <!-- Add new links here when a new app is created -->
         </ul>
     </nav>
