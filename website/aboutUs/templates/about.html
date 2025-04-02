@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .image-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .image-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .image-container img {
+            width: 300px; /* Adjust size as needed */
+            height: auto;
+            border-radius: 10px; /* Optional: Rounded corners */
+        }
+    </style>
+</head>
+<body>
+    <div class="image-container">
+        <div class="image-title">Process Engineering - Machine Design</div>
+        <img src="{%static 'image/chart.png' %}" alt="PMD">
+    </div>
+</body>
+</html>
+{% endblock %}

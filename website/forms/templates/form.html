@@ -8,31 +8,33 @@
   <title>Request Form</title>
 </head>
 <body>
-  <h1>Request Form</h1>
+  <h1>Machine Engineering Request Form</h1>
   <form action="/submit-request" method="POST"></form>
-    <label for="name">Title:</label>
+
+    <label>Type of Request:</label><br>
+    <input type="radio" id="project" name="request_type" value="project" required>
+    <label for="project">Project</label><br>
+    <input type="radio" id="modification" name="request_type" value="modification" required>
+    <label for="modification">Modification</label><br>
+    <input type="radio" id="drawing" name="request_type" value="drawing" required>
+    <label for="drawing">Drawing</label>
+    <br><br>
+
+    <label for="name">Proposed Title:</label>
     <input type="text" id="name" name="name" required>
     <br><br>
 
-    <label for="date">Date:</label>
+    <label for="date">Request Date:</label>
     <input type="date" id="date" name="date" value="{{ today_date }}" required>
     <br><br>
 
-    <label>Request Type:</label><br>
-    <input type="radio" id="general" name="request_type" value="general" required>
-    <label for="general">Project</label><br>
-    <input type="radio" id="technical" name="request_type" value="technical" required>
-    <label for="technical">Modification</label><br>
-    <input type="radio" id="billing" name="request_type" value="billing" required>
-    <label for="billing">Drawing</label>
+    <label for="details">User Requirement Specification:</label>
+    <br>
+    <textarea id="details" name="details" rows="4" required></textarea>
     <br><br>
 
     <label for="file">Upload File:</label>
     <input type="file" id="file" name="file" accept=".pdf,.doc,.docx,.jpg,.png,.xlsx">
-    <br><br>
-
-    <label for="details">Details:</label>
-    <textarea id="details" name="details" rows="4" required></textarea>
     <br><br>
 
     <label for="name">Purpose:</label>
@@ -43,11 +45,89 @@
     <input type="text" id="scope" name="scope" required>
     <br><br>
 
-    <label for="name">Name:</label>
+    <label for="name">Requested by:</label>
     <input type="text" id="name" name="name" required>
     <br><br>
 
     <button type="submit">Submit Request</button>
+    <br><br>
+
+    <label>To be filled by PE - PMD personel</label><br>
+    <br><br>
+
+    <label for="name">Verified by</label>
+    <input type="text" id="name" name="name" required>
+    <br><br>
+
+    <label for="category">Design In Charge:</label>
+    <select id="category" name="category" required>
+        <option value="">-- Select Designer --</option>
+        <option value="designer1">Jay Mari</option>
+        <option value="designer2">Sherry</option>
+        <option value="designer3">Jade</option>
+        <option value="designer4">Meldin</option>
+    </select>
+    <br><br>
+
+    <label for="name">Control Number:</label>
+    <input type="text" id="name" name="name" required>
+    <br><br>
+
+    <input type="radio" id="approve" name="request_type" value="approve" required>
+    <label for="approve">Approved</label><br>
+    <input type="radio" id="reject" name="request_type" value="reject" required>
+    <label for="reject">Not Approved</label><br>
+    <br><br>
+
+    <label for="name">Remarks</label>
+    <input type="text" id="name" name="name" required>
+    <br><br>
+
+    <label for="name">Start Date and Target Date</label>
+    <input type="text" id="name" name="name" required> <!--to be changed-->
+    <br><br>
+
+    <label>To be filled by concerned division</label><br>
+    <br><br>
+    
+    <input type="radio" id="general" name="request_type" value="general" required>
+    <label for="general">Approved</label><br>
+    <input type="radio" id="technical" name="request_type" value="technical" required>
+    <label for="technical">Not Approved</label><br>
+    <br><br>
+
+    <label for="details">Remarks:</label>
+    <br>
+    <textarea id="details" name="details" rows="4" required></textarea>
+    <br><br>
+
+    <label>Recieving and verification of Request Result</label><br>
+    <br><br>
+
+    <label for="name">Recieved By:</label>
+    <input type="text" id="name" name="name" required>
+    <br><br>
+
+    <label for="date">Date Recieved:</label>
+    <input type="date" id="date" name="date" value="{{ today_date }}" required>
+    <br><br>
+
+    <input type="radio" id="general" name="request_type" value="general" required>
+    <label for="general">OK</label><br>
+    <input type="radio" id="technical" name="request_type" value="technical" required>
+    <label for="technical">NO GOOD</label><br>
+
+    <label for="details">Remarks:</label>
+    <br>
+    <textarea id="details" name="details" rows="4" required></textarea>
+    <br><br>
+    <label for="name">Remarks By:</label>
+    <input type="text" id="name" name="name" required>
+    <br><br>
+    <label for="name">Verified By:</label>
+    <input type="text" id="name" name="name" required>
+    <br><br>
+
   </form>
 </body>
 </html>
