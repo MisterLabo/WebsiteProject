@@ -23,6 +23,7 @@ urlpatterns = [
     path('', include("forms.urls")),
     path('', include("personalProfile.urls")),
     path('', include("dashboard.urls")),
+    path('', include("aboutUs.urls")),
     
 
 ]

@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'forms',
     'personalProfile',
     'dashboard',
+    'aboutUs',
 
 ]
 
