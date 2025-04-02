@@ -1,133 +1,145 @@
 <!DOCTYPE html>
 {% extends "base.html" %}
+{% load static %}
 {% block content %}
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Request Form</title>
+  <link rel="stylesheet" href="{% static 'forms/css/form.css' %}">
 </head>
 <body>
   <h1>Machine Engineering Request Form</h1>
-  <form action="/submit-request" method="POST"></form>
-
-    <label>Type of Request:</label><br>
-    <input type="radio" id="project" name="request_type" value="project" required>
-    <label for="project">Project</label><br>
-    <input type="radio" id="modification" name="request_type" value="modification" required>
-    <label for="modification">Modification</label><br>
-    <input type="radio" id="drawing" name="request_type" value="drawing" required>
-    <label for="drawing">Drawing</label>
-    <br><br>
-
-    <label for="name">Proposed Title:</label>
-    <input type="text" id="name" name="name" required>
-    <br><br>
-
-    <label for="date">Request Date:</label>
-    <input type="date" id="date" name="date" value="{{ today_date }}" required>
-    <br><br>
-
-    <label for="details">User Requirement Specification:</label>
-    <br>
-    <textarea id="details" name="details" rows="4" required></textarea>
-    <br><br>
-
-    <label for="file">Upload File:</label>
-    <input type="file" id="file" name="file" accept=".pdf,.doc,.docx,.jpg,.png,.xlsx">
-    <br><br>
-
-    <label for="name">Purpose:</label>
-    <input type="text" id="purpose" name="purpose" required>
-    <br><br>
-
-    <label for="name">Scope:</label>
-    <input type="text" id="scope" name="scope" required>
-    <br><br>
-
-    <label for="name">Requested by:</label>
-    <input type="text" id="name" name="name" required>
-    <br><br>
-
-    <button type="submit">Submit Request</button>
-    <br><br>
-
-    <label>To be filled by PE - PMD personel</label><br>
-    <br><br>
-
-    <label for="name">Verified by</label>
-    <input type="text" id="name" name="name" required>
-    <br><br>
-
-    <label for="category">Design In Charge:</label>
-    <select id="category" name="category" required>
-        <option value="">-- Select Designer --</option>
-        <option value="designer1">Jay Mari</option>
-        <option value="designer2">Sherry</option>
-        <option value="designer3">Jade</option>
-        <option value="designer4">Meldin</option>
-    </select>
-    <br><br>
-
-    <label for="name">Control Number:</label>
-    <input type="text" id="name" name="name" required>
-    <br><br>
-
-    <input type="radio" id="approve" name="request_type" value="approve" required>
-    <label for="approve">Approved</label><br>
-    <input type="radio" id="reject" name="request_type" value="reject" required>
-    <label for="reject">Not Approved</label><br>
-    <br><br>
-
-    <label for="name">Remarks</label>
-    <input type="text" id="name" name="name" required>
-    <br><br>
-
-    <label for="name">Start Date and Target Date</label>
-    <input type="text" id="name" name="name" required> <!--to be changed-->
-    <br><br>
-
-    <label>To be filled by concerned division</label><br>
-    <br><br>
+  <form action="/submit-request" method="POST" enctype="multipart/form-data" class="form-section">
+    {% csrf_token %}
     
-    <input type="radio" id="general" name="request_type" value="general" required>
-    <label for="general">Approved</label><br>
-    <input type="radio" id="technical" name="request_type" value="technical" required>
-    <label for="technical">Not Approved</label><br>
-    <br><br>
+    <!-- Requestor's Section -->
+    <fieldset>
+      <legend>Request Details</legend>
+      <label for="request_type">Type of Request:</label><br>
+      <select id="request_type" name="request_type" required>
+        <option value="project">Project</option>
+        <option value="modification">Modification</option>
+        <option value="drawing">Drawing</option>
+      </select>
+      <br><br>
 
-    <label for="details">Remarks:</label>
-    <br>
-    <textarea id="details" name="details" rows="4" required></textarea>
-    <br><br>
+      <label for="proposed_title">Proposed Title:</label>
+      <input type="text" id="proposed_title" name="proposed_title" required>
+      <br><br>
 
-    <label>Recieving and verification of Request Result</label><br>
-    <br><br>
+      <label for="request_date">Request Date:</label>
+      <input type="date" id="request_date" name="request_date" value="{{ today_date|date:'Y-m-d' }}" required>
+      <br><br>
 
-    <label for="name">Recieved By:</label>
-    <input type="text" id="name" name="name" required>
-    <br><br>
+      <label for="user_requirement_specification">User Requirement Specification:</label>
+      <br>
+      <textarea id="user_requirement_specification" name="user_requirement_specification" rows="4" required></textarea>
+      <br><br>
 
-    <label for="date">Date Recieved:</label>
-    <input type="date" id="date" name="date" value="{{ today_date }}" required>
-    <br><br>
+      <label for="uploaded_file">Upload File:</label>
+      <input type="file" id="uploaded_file" name="uploaded_file" accept=".pdf,.doc,.docx,.jpg,.png,.xlsx">
+      <br><br>
 
-    <input type="radio" id="general" name="request_type" value="general" required>
-    <label for="general">OK</label><br>
-    <input type="radio" id="technical" name="request_type" value="technical" required>
-    <label for="technical">NO GOOD</label><br>
+      <label for="purpose">Purpose:</label>
+      <input type="text" id="purpose" name="purpose" required>
+      <br><br>
 
-    <label for="details">Remarks:</label>
-    <br>
-    <textarea id="details" name="details" rows="4" required></textarea>
-    <br><br>
-    <label for="name">Remarks By:</label>
-    <input type="text" id="name" name="name" required>
-    <br><br>
-    <label for="name">Verified By:</label>
-    <input type="text" id="name" name="name" required>
-    <br><br>
+      <label for="scope">Scope:</label>
+      <input type="text" id="scope" name="scope" required>
+      <br><br>
 
+      <label for="requested_by">Requested by:</label>
+      <input type="text" id="requested_by" name="requested_by" required>
+      <br><br>
+
+      <button type="submit">Submit Request</button>
+    </fieldset>
+  </form>
+
+  <!-- Receiver's Section (visible but unfillable) -->
+  <form action="/receiver-action" method="POST" class="form-section">
+    {% csrf_token %}
+    <fieldset>
+      <legend>To be filled by PE - PMD personnel</legend>
+      <label for="verified_by">Verified by:</label>
+      <input type="text" id="verified_by" name="verified_by" disabled>
+      <br><br>
+
+      <label for="design_in_charge">Design In Charge:</label>
+      <select id="design_in_charge" name="design_in_charge" disabled>
+          <option value="">-- Select Designer --</option>
+          <option value="designer1">Jay Mari</option>
+          <option value="designer2">Sherry</option>
+          <option value="designer3">Jade</option>
+          <option value="designer4">Meldin</option>
+      </select>
+      <br><br>
+
+      <label for="control_number">Control Number:</label>
+      <input type="text" id="control_number" name="control_number" disabled>
+      <br><br>
+
+      <input type="radio" id="approve" name="approval_status" value="approve" disabled>
+      <label for="approve">Approved</label><br>
+      <input type="radio" id="reject" name="approval_status" value="reject" disabled>
+      <label for="reject">Not Approved</label><br>
+      <br><br>
+
+      <label for="remarks">Remarks:</label>
+      <input type="text" id="remarks" name="remarks" disabled>
+      <br><br>
+
+      <label for="start_target_dates">Start Date and Target Date:</label>
+      <input type="text" id="start_target_dates" name="start_target_dates" disabled>
+      <br><br>
+    </fieldset>
+  </form>
+
+  <!-- Validation Section (visible but unfillable) -->
+  <form action="/validation-action" method="POST" class="form-section">
+    {% csrf_token %}
+    <fieldset>
+      <legend>To be filled by concerned division</legend>
+      <input type="radio" id="general" name="validation_status" value="general" disabled>
+      <label for="general">Approved</label><br>
+      <input type="radio" id="technical" name="validation_status" value="technical" disabled>
+      <label for="technical">Not Approved</label><br>
+      <br><br>
+
+      <label for="division_remarks">Remarks:</label>
+      <br>
+      <textarea id="division_remarks" name="division_remarks" rows="4" disabled></textarea>
+      <br><br>
+
+      <label for="received_by">Received By:</label>
+      <input type="text" id="received_by" name="received_by" disabled>
+      <br><br>
+
+      <label for="date_received">Date Received:</label>
+      <input type="date" id="date_received" name="date_received" disabled>
+      <br><br>
+
+      <input type="radio" id="ok" name="final_status" value="ok" disabled>
+      <label for="ok">OK</label><br>
+      <input type="radio" id="no_good" name="final_status" value="no_good" disabled>
+      <label for="no_good">NO GOOD</label><br>
+      <br><br>
+
+      <label for="result_remarks">Remarks:</label>
+      <br>
+      <textarea id="result_remarks" name="result_remarks" rows="4" disabled></textarea>
+      <br><br>
+
+      <label for="remarks_by">Remarks By:</label>
+      <input type="text" id="remarks_by" name="remarks_by" disabled>
+      <br><br>
+
+      <label for="verified_by">Verified By:</label>
+      <input type="text" id="verified_by" name="verified_by" disabled>
+      <br><br>
+    </fieldset>
   </form>
 </body>
 </html>

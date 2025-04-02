@@ -1,0 +1,30 @@
+/* Navigation bar styling */
+.navbar {
+    width: 250px;
+    height: 100vh;
+    background-color: #333;
+    color: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: transform 0.3s ease;
+}
+
+/* Hidden state */
+.navbar.hidden {
+    transform: translateX(-100%);
+}
+
+/* Toggle button */
+.navbar-toggle {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    z-index: 1000;
+}

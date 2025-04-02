@@ -1,0 +1,11 @@
+/* Responsive design */
+@media (max-width: 600px) {
+    form {
+        padding: 15px;
+        margin-left: 0; /* Reset margin for smaller screens where the navigation bar might collapse */
+    }
+
+    form h1 {
+        font-size: 20px;
+    }
+}
