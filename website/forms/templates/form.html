@@ -30,12 +30,19 @@
       <br><br>
 
       <label for="request_date">Request Date:</label>
-      <input type="date" id="request_date" name="request_date" value="{{ today_date|date:'Y-m-d' }}" required>
+      <input type="date" id="request_date" name="request_date" required readonly>
       <br><br>
+
+      <script>
+        document.addEventListener("DOMContentLoaded", function() {
+          let today = new Date().toISOString().split('T')[0]; // Get today's date in YYYY-MM-DD format
+          document.getElementById('request_date').value = today;
+        });
+      </script>
 
       <label for="user_requirement_specification">User Requirement Specification:</label>
       <br>
-      <textarea id="user_requirement_specification" name="user_requirement_specification" rows="4" required></textarea>
+      <textarea id="user_requirement_specification" name="user_requirement_specification" rows="4" ></textarea>
       <br><br>
 
       <label for="uploaded_file">Upload File:</label>
@@ -68,12 +75,17 @@
       <br><br>
 
       <label for="design_in_charge">Design In Charge:</label>
-      <select id="design_in_charge" name="design_in_charge" disabled>
+      <select id="design_in_charge" name="design_in_charge" >
           <option value="">-- Select Designer --</option>
-          <option value="designer1">Jay Mari</option>
-          <option value="designer2">Sherry</option>
-          <option value="designer3">Jade</option>
-          <option value="designer4">Meldin</option>
+          <option value="designer1">Peter Romanillos</option>
+          <option value="designer2">Roseller Carido</option>
+          <option value="designer3">Christian Lloyd Porol</option>
+          <option value="designer4">Julito Pangalay Jr.</option>
+          <option value="designer5">Mark Joseph Planca</option>
+          <option value="designer6">Meldin Evangelista</option>
+          <option value="designer7">Jay Mari Quilantang</option>
+          <option value="designer8">Sherry Balandra</option>
+          <option value="designer9">Jade Macalalad</option>
       </select>
       <br><br>
 
