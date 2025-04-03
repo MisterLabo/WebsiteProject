@@ -32,14 +32,14 @@
             display: none; /* Ensure this is only applied when toggling */
         }
         .sidebar {
-            width: 100px; /* Define a fixed width for the sidebar */
+            width: 150px; /* Define a fixed width for the sidebar */
             position: fixed; /* Keep the sidebar fixed on the left */
             height: 100%; /* Make the sidebar span the full height of the viewport */
             overflow-y: auto; /* Add scrolling if the content overflows */
             display: block; /* Ensure the sidebar is visible by default */
         }
         .content {
-            margin-left: 250px; /* Adjust this value to match the width of the sidebar */
+            margin-left: 200px; /* Adjust this value to match the width of the sidebar */
             padding: 20px; /* Optional: Add padding for better spacing */
         }
     </style>
@@ -50,13 +50,12 @@
             <span class="sr-only">Toggle navigation</span>
             &#9776;
         </button>
-        <a href="{% url 'home:index' %}" class="nav-logo-container">
+        <a href="{% url 'dashboard:Dashboard' %}" class="nav-logo-container">
             <img src="{% static 'images/logo.jpg' %}" alt="Toyoflex Logo" class="nav-logo">
         </a>
         <ul id="navMenu" class="nav-menu vertical-menu" role="menu">
-            <li class="nav-item" role="menuitem"><a href="{% url 'home:index' %}" class="nav-link">Home</a></li>
-            <li class="nav-item" role="menuitem"><a href="{% url 'forms:request' %}" class="nav-link">Forms</a></li>
             <li class="nav-item" role="menuitem"><a href="{% url 'dashboard:Dashboard' %}" class="nav-link">Dashboard</a></li>
+            <li class="nav-item" role="menuitem"><a href="{% url 'forms:request' %}" class="nav-link">Forms</a></li>
             <li class="nav-item" role="menuitem"><a href="{% url 'aboutUs:about_us' %}" class="nav-link">About Us</a></li>
         </ul>
     </nav>
