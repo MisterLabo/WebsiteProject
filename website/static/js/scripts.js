@@ -30,14 +30,14 @@ document.addEventListener('DOMContentLoaded', () => {
     closeNavOnClick();
 });
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', () => {
     const navToggle = document.querySelector('.nav-toggle');
     const sidebar = document.querySelector('.sidebar');
 
     if (navToggle && sidebar) {
-        navToggle.addEventListener('click', function () {
-            const expanded = this.getAttribute('aria-expanded') === 'true';
-            this.setAttribute('aria-expanded', !expanded);
+        navToggle.addEventListener('click', () => {
+            const expanded = navToggle.getAttribute('aria-expanded') === 'true';
+            navToggle.setAttribute('aria-expanded', !expanded);
             sidebar.classList.toggle('hidden');
         });
     }

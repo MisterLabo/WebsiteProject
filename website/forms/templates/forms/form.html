@@ -1,0 +1,48 @@
+{% if perms.forms.can_view_section_1 %}
+<div id="employee-section">
+    <h2>Employee Section</h2>
+    {% if perms.forms.can_fill_section_1 %}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="request_type">Request Type:</label>
+        <select id="request_type" name="request_type">
+            <option value="project">Project</option>
+            <option value="modification">Modification</option>
+            <option value="drawing">Drawing</option>
+        </select>
+
+        <label for="proposed_title">Proposed Title:</label>
+        <input type="text" id="proposed_title" name="proposed_title">
+
+        <label for="request_date">Request Date:</label>
+        <input type="date" id="request_date" name="request_date">
+    </form>
+    {% else %}
+    <p>You do not have permission to fill this section.</p>
+    {% endif %}
+</div>
+{% endif %}
+
+{% if perms.forms.can_view_section_2 %}
+<div id="section-manager-section">
+    <h2>Section Manager Section</h2>
+    {% if perms.forms.can_fill_section_2 %}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="user_requirement_specification">User Requirement Specification:</label>
+        <textarea id="user_requirement_specification" name="user_requirement_specification"></textarea>
+
+        <label for="uploaded_file">Upload File:</label>
+        <input type="file" id="uploaded_file" name="uploaded_file">
+
+        <label for="purpose">Purpose:</label>
+        <input type="text" id="purpose" name="purpose">
+
+        <label for="scope">Scope:</label>
+        <input type="text" id="scope" name="scope">
+    </form>
+    {% else %}
+    <p>You do not have permission to fill this section.</p>
+    {% endif %}
+</div>
+{% endif %}

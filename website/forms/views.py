@@ -14,3 +14,13 @@ def submit_request(request):
         # Process the form data
         messages.success(request, "Request submitted successfully!")
         return redirect('form')  # Replace 'form' with the name of your form's URL pattern
+
+@permission_required('forms.can_view_employee_section', raise_exception=True)
+def employee_section_view(request):
+    # Logic for Employee Section
+    return render(request, 'forms/employee_section.html')
+
+@permission_required('forms.can_view_section_manager_section', raise_exception=True)
+def section_manager_section_view(request):
+    # Logic for Section Manager Section
+    return render(request, 'forms/section_manager_section.html')
