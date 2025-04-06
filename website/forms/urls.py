@@ -9,5 +9,4 @@ urlpatterns = [
     path('manager-approval/', views.manager_approval, name='approval'),
     path('receiver-action/', views.receiver_action, name='designer'),
     path('validation-action/', views.validation_action, name='validation'),
-    path('preview-request/<int:request_id>/', views.preview_request, name='preview_request'),
 ]
