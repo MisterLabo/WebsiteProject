@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Manager's Approval</h1>
+
+<!-- Manager's Approval Section -->
+<form action="{% url 'forms:approval' %}" method="POST" class="form-section">
+    {% csrf_token %}
+    <fieldset>
+        <legend>Manager's Approval</legend>
+
+        <div class="form-group">
+            <label for="manager_name">Manager's Name:</label>
+            <input type="text" id="manager_name" name="manager_name" required>
+        </div>
+
+        <div class="form-group">
+            <label>Approval Status:</label>
+            <div>
+                <input type="radio" id="approve" name="approval_status" value="approve" required>
+                <label for="approve">Approved</label>
+            </div>
+            <div>
+                <input type="radio" id="reject" name="approval_status" value="reject" required>
+                <label for="reject">Not Approved</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="manager_remarks">Remarks:</label>
+            <textarea id="manager_remarks" name="manager_remarks" rows="4"></textarea>
+        </div>
+
+        <div class="form-group">
+            <button type="submit">Submit Approval</button>
+        </div>
+    </fieldset>
+</form>
+{% endblock %}

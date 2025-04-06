@@ -42,10 +42,32 @@
             margin-left: 200px; /* Adjust this value to match the width of the sidebar */
             padding: 20px; /* Optional: Add padding for better spacing */
         }
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 10px 0;
+            list-style: none;
+            margin: 0;
+            z-index: 1000;
+        }
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+        .dropdown-item {
+            padding: 10px 20px;
+            text-decoration: none;
+            color: #333;
+            display: block;
+        }
+        .dropdown-item:hover {
+            background-color: #f0f0f0;
+        }
     </style>
 </head>
 <body>
-    <nav class="sidebar ocean-theme" aria-label="Main Navigation"> <!-- Remove 'hidden' class -->
+    <nav class="sidebar ocean-theme" aria-label="Main Navigation">
         <button class="nav-toggle" aria-expanded="false" aria-controls="navMenu" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>
             &#9776;
@@ -55,7 +77,15 @@
         </a>
         <ul id="navMenu" class="nav-menu vertical-menu" role="menu">
             <li class="nav-item" role="menuitem"><a href="{% url 'dashboard:Dashboard' %}" class="nav-link">Dashboard</a></li>
-            <li class="nav-item" role="menuitem"><a href="{% url 'forms:request' %}" class="nav-link">Forms</a></li>
+            <li class="nav-item dropdown" role="menuitem">
+                <a href="#" class="nav-link dropdown-toggle" aria-expanded="false" aria-haspopup="true">Forms</a>
+                <ul class="dropdown-menu">
+                    <li><a href="{% url 'forms:request' %}" class="dropdown-item">Request Form</a></li>
+                    <li><a href="{% url 'forms:approval' %}" class="dropdown-item">Approval Form</a></li>
+                    <li><a href="{% url 'forms:designer' %}" class="dropdown-item">Designer Form</a></li>
+                    <li><a href="{% url 'forms:validation' %}" class="dropdown-item">Validation Form</a></li>
+                </ul>
+            </li>
             <li class="nav-item" role="menuitem"><a href="{% url 'aboutUs:about_us' %}" class="nav-link">About Us</a></li>
             <li class="nav-item" role="menuitem"><a href="{% url 'personalProfile:Profile' %}" class="nav-link">Profile</a></li>
         </ul>
