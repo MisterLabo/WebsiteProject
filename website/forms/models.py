@@ -30,3 +30,24 @@ class ContactForm(models.Model):
 
     def __str__(self):
         return self.proposed_title
+
+class Request(models.Model):
+    APPROVAL_CHOICES = [
+        ('approve', 'Approve'),
+        ('reject', 'Reject'),
+    ]
+
+    title = models.CharField(max_length=100)
+    description = models.TextField()
+    submitted_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name="submitted_requests")
+    is_approved = models.CharField(max_length=10, choices=APPROVAL_CHOICES, null=True, blank=True)
+    reviewer_comments = models.TextField(null=True, blank=True)
+    assigned_designer = models.CharField(max_length=50, null=True, blank=True)
+    rating = models.IntegerField(null=True, blank=True)
+    approval_date = models.DateField(null=True, blank=True)
+    reviewed_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name="reviewed_requests")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.title
