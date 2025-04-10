@@ -4,9 +4,10 @@ from . import views
 app_name = 'forms'
 
 urlpatterns = [
-    path('forms/', views.form_display, name='request'),
-    path('submit-request/', views.submit_request, name='submit_request'),
-    path('manager-approval/', views.manager_approval, name='approval'),
-    path('receiver-action/', views.receiver_action, name='designer'),
-    path('validation-action/', views.validation_action, name='validation'),
+    path('request/', views.create_request, name='create_request'),
+    path('requestlist/', views.list_request, name='list_request'),
+    path('approve/<int:request_id>/', views.approve_request, name='approve_request'),
+    path('reject/<int:request_id>/', views.reject_request, name='reject_request'),
+    path('supervisor-review/<int:request_id>/', views.supervisor_review, name='supervisor_review'),
+    path('assign-engineer/<int:request_id>/', views.assign_engineer, name='assign_engineer'),
 ]

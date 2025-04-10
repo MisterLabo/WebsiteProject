@@ -1,0 +1,45 @@
+<h1>Submitted Requests</h1>
+
+<ul>
+    {% for request in requests %}
+    <li>
+        <strong>{{ request.proposed_title }}</strong> - {{ request.request_type }} ({{ request.request_date }})  
+        <br>Status: {{ request.get_approval_status_display }}
+        <br>Supervisor Status: {{ request.get_supervisor_status_display }}
+        {% if request.assigned_engineer %}
+            <br>Assigned to: {{ request.assigned_engineer.get_full_name }}
+        {% endif %}
+
+        <br>
+
+        <!-- Stage 1: Manager approval -->
+        {% if request.approval_status == 'pending' and perms.forms.can_approve_request %}
+            <a href="{% url 'forms:approve_request' request.id %}">Approve</a> |
+            <a href="{% url 'forms:reject_request' request.id %}">Reject</a>
+
+        <!-- Stage 2: Supervisor review (only after manager approves) -->
+        {% elif request.approval_status == 'approved' and request.supervisor_status == 'pending' and perms.forms.can_review_supervisor %}
+            <a href="{% url 'forms:supervisor_review' request.id %}">Supervisor Review</a>
+
+        <!-- Stage 3: Engineer assignment (only after supervisor approves) -->
+        {% elif request.approval_status == 'approved' and request.supervisor_status == 'approved' and not request.assigned_engineer and perms.forms.can_assign_engineer %}
+            
+            <!-- Dropdown for assigning an engineer -->
+            <form action="{% url 'forms:assign_engineer' request.id %}" method="POST">
+                {% csrf_token %}
+                <label for="engineer">Assign Engineer:</label>
+                <select name="engineer" id="engineer">
+                    {% for engineer in engineers %}
+                        <option value="{{ engineer.id }}">{{ engineer.get_full_name }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit">Assign</button>
+            </form>
+
+        {% endif %}
+    </li>
+    <hr>
+    {% empty %}
+    <li>No requests found.</li>
+    {% endfor %}
+</ul>
