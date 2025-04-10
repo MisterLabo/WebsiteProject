@@ -3,10 +3,17 @@
 ## Project Goals
 This project aims to digitize and streamline the process of submitting and managing machine engineering requests.
 
+## User Roles and Permissions
+- **Manager**: Can approve or reject requests.
+- **Supervisor**: Can review and approve requests after manager approval.
+- **Engineer**: Can view and work on assigned requests.
+- **Staff**: Can submit and track their own requests.
+
 ## Features
 - User authentication and profile management.
 - Submission of machine engineering requests with file uploads.
 - Dashboard for tracking request statuses.
+- Role-based access control for request management.
 
 ## Setup Instructions
 1. Clone the repository:
