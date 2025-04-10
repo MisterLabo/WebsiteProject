@@ -1,47 +1,35 @@
 from django import forms
+from .models import RequestForm
+from django.contrib.auth.models import User
 
-class RequestForm(forms.Form):
-    # Fields for the request form
-    title = forms.CharField(max_length=100, required=True, label="Request Title")
-    description = forms.CharField(widget=forms.Textarea, required=True, label="Description")
-    submitted_by = forms.CharField(max_length=50, required=True, label="Submitted By")
-    
-    # Approval or rejection fields
-    is_approved = forms.ChoiceField(
-        choices=[('approve', 'Approve'), ('reject', 'Reject')],
-        required=False,
-        label="Approval Status"
-    )
-    approval_date = forms.DateField(required=False, label="Approval Date")
-    reviewed_by = forms.CharField(max_length=50, required=False, label="Reviewed By")
-    
-    # Review and assignment fields
-    reviewer_comments = forms.CharField(
-        widget=forms.Textarea, required=False, label="Reviewer Comments"
-    )
-    assigned_designer = forms.CharField(
-        max_length=50, required=False, label="Assigned Designer"
-    )
-    
-    # Validation field for rating
-    rating = forms.IntegerField(
-        required=False,
-        min_value=1,
-        max_value=5,
-        label="Satisfaction Rating (1-5)"
-    )
+class RequestFormForm(forms.ModelForm):
+    class Meta:
+        model = RequestForm
+        fields = ['request_type', 'proposed_title', 'request_date', 'purpose', 'uploaded_file']  # Or list the fields you want
 
-    def clean_rating(self):
-        rating = self.cleaned_data.get('rating')
-        if rating is not None and (rating < 1 or rating > 5):
-            raise forms.ValidationError("Rating must be between 1 and 5.")
-        return rating
+class SupervisorReviewForm(forms.ModelForm):
+    class Meta:
+        model = RequestForm
+        fields = ['supervisor_status']
 
-    def clean(self):
-        cleaned_data = super().clean()
-        is_approved = cleaned_data.get('is_approved')
-        reviewer_comments = cleaned_data.get('reviewer_comments')
+class EngineerAssignForm(forms.ModelForm):
+    class Meta:
+        model = RequestForm
+        fields = ['assigned_engineer']
 
-        if is_approved == 'reject' and not reviewer_comments:
-            raise forms.ValidationError("Reviewer comments are required if the request is rejected.")
-        return cleaned_data
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Limit choices to users in the 'Engineer' group
+        self.fields['assigned_engineer'].queryset = User.objects.filter(groups__name='Engineer')
+
+
+"""
+class ApprovalForm(forms.ModelForm):
+    class Meta: 
+        model = RequestForm
+        fields = ['status']
+        widgets = {
+            'status': forms.RadioSelect(choices=[('approved', 'Approve'), ('rejected', 'Reject')])
+        }
+
+"""
