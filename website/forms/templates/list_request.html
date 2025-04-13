@@ -1,78 +1,86 @@
+{% extends 'base.html' %}
 {% load static %}
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Submitted Requests</title>
-    <link rel="stylesheet" href="{% static 'css/list_request.css' %}">
+    <link rel="stylesheet" href="{% static 'forms/css/list_request.css' %}">
 </head>
 <body>
-    <h1>Submitted Requests</h1>
-
-    <div class="mb-3">
-        <form method="get" action="">
-            <input type="text" name="search" placeholder="Search by title..." class="form-control" value="{{ request.GET.search }}">
-            <button type="submit" class="btn btn-primary mt-2">Search</button>
-        </form>
-    </div>
-
-    <table class="table table-striped table-hover table-bordered">
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Type</th>
-                <th>Date</th>
-                <th>Status</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for request in requests %}
-            <tr class="{% if request.approval_status == 'pending' %}table-warning{% elif request.approval_status == 'approved' %}table-success{% elif request.approval_status == 'rejected' %}table-danger{% endif %}">
-                <td>{{ request.proposed_title }}</td>
-                <td>{{ request.get_request_type_display }}</td>
-                <td>{{ request.request_date }}</td>
-                <td>{{ request.get_approval_status_display }}</td>
-                <td>
-                    {% if request.approval_status == 'pending' and perms.forms.can_approve_request %}
-                        <a href="{% url 'forms:approve_request' request.id %}" class="btn btn-success btn-sm">Approve</a>
-                        <a href="{% url 'forms:reject_request' request.id %}" class="btn btn-danger btn-sm">Reject</a>
-                    {% elif request.approval_status == 'approved' and perms.forms.can_review_supervisor %}
-                        <a href="{% url 'forms:supervisor_review' request.id %}" class="btn btn-primary btn-sm">Supervisor Review</a>
-                    {% elif request.approval_status == 'approved' and request.supervisor_status == 'approved' and not request.assigned_engineer and perms.forms.can_assign_engineer %}
-                        <a href="{% url 'forms:supervisor_assign_engineer' request.id %}" class="btn btn-info btn-sm">Assign Engineer</a>
+    <div class="container mt-5">
+        <h1 class="text-center">Submitted Requests</h1>
+        <div class="mb-3">
+            <form method="get" action="">
+                <input type="text" name="search" placeholder="Search by title..." class="form-control" value="{{ request.GET.search }}">
+                <button type="submit" class="btn btn-primary mt-2">Search</button>
+            </form>
+        </div>
+        <table class="table table-striped table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Type</th>
+                    <th>Date</th>
+                    <th>Manager Status</th>
+                    <th>Supervisor Status</th>
+                    <th>Assigned Engineer</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for req in requests %}
+                <tr class="{% if req.approval_status == 'pending' %}table-warning{% elif req.approval_status == 'approved' %}table-success{% elif req.approval_status == 'rejected' %}table-danger{% endif %}">
+                    <td><a href="{% url 'forms:request_detail' req.id %}">{{ req.proposed_title }}</a></td>
+                    <td>{{ req.get_request_type_display }}</td>
+                    <td>{{ req.request_date }}</td>
+                    <td>{{ req.get_approval_status_display }}</td>
+                    <td>{{ req.supervisor_status }}</td>
+                    <td>{{ req.assigned_engineer }}</td>
+                    <td>
+                        {% if req.approval_status == 'pending' and perms.forms.can_approve_request %}
+                            <a href="{% url 'forms:approve_request' req.id %}" class="btn btn-success btn-sm mb-2 me-2">Approve</a>
+                            <a href="{% url 'forms:reject_request' req.id %}" class="btn btn-danger btn-sm mb-2">Reject</a>
+                        {% endif %}
+                        {% if req.approval_status == 'approved' and perms.forms.can_review_supervisor %}
+                            <a href="{% url 'forms:supervisor_review' req.id %}" class="btn btn-primary btn-sm mb-2 me-2">Supervisor Review</a>
+                        {% endif %}
+                        {% if req.approval_status == 'approved' and req.supervisor_status == 'approved' and not req.assigned_engineer and perms.forms.can_assign_engineer %}
+                            <form method="get" action="{% url 'forms:supervisor_assign_engineer' req.id %}" class="d-inline">
+                                <button type="submit" class="btn btn-warning btn-sm mb-2">Assign Engineer</button>
+                            </form>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="7">No requests found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="pagination">
+            {% if requests.has_other_pages %}
+                <span class="step-links">
+                    {% if requests.has_previous %}
+                        <a href="?page=1">&laquo; first</a>
+                        <a href="?page={{ requests.previous_page_number }}">previous</a>
                     {% endif %}
-                </td>
-            </tr>
-            {% empty %}
-            <tr>
-                <td colspan="5">No requests found.</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-
-    <div class="pagination">
-        {% if is_paginated %}
-            <span class="step-links">
-                {% if page_obj.has_previous %}
-                    <a href="?page=1">&laquo; first</a>
-                    <a href="?page={{ page_obj.previous_page_number }}">previous</a>
-                {% endif %}
-
-                <span class="current">
-                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                    <span class="current">
+                        Page {{ requests.number }} of {{ requests.paginator.num_pages }}.
+                    </span>
+                    {% if requests.has_next %}
+                        <a href="?page={{ requests.next_page_number }}">next</a>
+                        <a href="?page={{ requests.paginator.num_pages }}">last &raquo;</a>
+                    {% endif %}
                 </span>
-
-                {% if page_obj.has_next %}
-                    <a href="?page={{ page_obj.next_page_number }}">next</a>
-                    <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
-                {% endif %}
-            </span>
-        {% endif %}
+            {% endif %}
+        </div>
     </div>
-
-    <script src="{% static 'js/list_request.js' %}"></script>
+    <script src="{% static 'forms/js/list_request.js' %}"></script>
 </body>
 </html>
+{% endblock %}
+

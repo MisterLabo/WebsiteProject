@@ -22,4 +22,7 @@ urlpatterns = [
     
     # URL for supervisor assigning engineers
     path('supervisor-assign/<int:request_id>/', views.supervisor_assign_engineer, name='supervisor_assign_engineer'),
+    
+    # URL for request detail view
+    path('request-detail/<int:request_id>/', views.request_detail, name='request_detail'),
 ]

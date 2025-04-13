@@ -1,6 +1,11 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
 <h2>Assign Engineer</h2>
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Assign</button>
 </form>
+<a href="{% url 'forms:list_request' %}">Back to List</a>
+{% endblock %}

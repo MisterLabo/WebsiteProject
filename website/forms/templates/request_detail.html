@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request Detail</title>
+    <link rel="stylesheet" href="{% static 'forms/css/request_detail.css' %}">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">{{ request.proposed_title }}</h1>
+        <div class="card mt-4">
+            <div class="card-body">
+                <p><strong>Type:</strong> {{ request.get_request_type_display }}</p>
+                <p><strong>Date:</strong> {{ request.request_date }}</p>
+                <p><strong>Purpose:</strong> {{ request.purpose }}</p>
+                <p><strong>Manager Status:</strong> {{ request.get_approval_status_display }}</p>
+                <p><strong>Supervisor Status:</strong> {{ request.supervisor_status }}</p>
+                <p><strong>Assigned Engineer:</strong> {{ request.assigned_engineer }}</p>
+            </div>
+        </div>
+        <div class="text-center mt-4">
+            <a href="{% url 'forms:list_request' %}" class="btn btn-secondary">Back to List</a>
+        </div>
+    </div>
+    <script src="{% static 'forms/js/request_detail.js' %}"></script>
+</body>
+</html>

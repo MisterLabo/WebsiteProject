@@ -1,6 +1,26 @@
-<h1>Request Form</h1>
-<form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Submit</button>
-</form>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Request</title>
+    <link rel="stylesheet" href="{% static 'forms/css/create_request.css' %}">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Create Request</h1>
+        <form method="POST" enctype="multipart/form-data" class="mt-4">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+    <script src="{% static 'forms/js/create_request.js' %}"></script>
+</body>
+</html>
+{% endblock %}

@@ -40,4 +40,15 @@ class Migration(migrations.Migration):
                 'permissions': [('can_approve_request', 'Can approve request'), ('can_reject_request', 'Can reject request'), ('can_review_supervisor', 'Can review supervisor'), ('can_assign_engineer', 'Can assign Engineer')],
             },
         ),
+        migrations.AlterModelOptions(
+            name='requestform',
+            options={
+                'permissions': [
+                    ('can_approve_request', 'Can approve request'),
+                    ('can_reject_request', 'Can reject request'),
+                    ('can_review_supervisor', 'Can review supervisor'),
+                    ('can_assign_engineer', 'Can assign Engineer'),
+                ],
+            },
+        ),
     ]
