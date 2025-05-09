@@ -22,7 +22,7 @@ This project aims to digitize and streamline the process of submitting and manag
    ```
 2. Navigate to the project directory:
    ```bash
-   cd toyoflexPMDwebsite
+   cd websiteProject
    ```
 3. Install dependencies:
    ```bash
